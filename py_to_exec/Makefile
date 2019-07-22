@@ -1,33 +1,32 @@
 
-CYTHON 			= 			/usr/bin/cython3
-CYTHON_ARGS = 			--embed
-CYTHON_OBJ 	= 			$(SRC:.py=.c)
+CYTHON 			= 	/usr/bin/cython3
+CYTHON_ARGS 	= 	--embed
+CYTHON_OBJ 		= 	$(SRC:.py=.c)
 
-GCC					= 			/usr/bin/gcc
-GCC_INCLUDE = 			-Wall -Os -I/usr/include/python3.6m
-GCC_ARGS		= 			-lpython3.6m -lpthread -lm -lutil -ldl
+GCC				= 	/usr/bin/gcc
+GCC_INCLUDE 	= 	-Wall -Os -I/usr/include/python3.6m
+GCC_ARGS		= 	-lpython3.6m -lpthread -lm -lutil -ldl
 
-RM					= 			rm -f
+RM				= 	rm -f
 
-SRC 				= 			hello.py
+SRC 			= 	hello.py
+NAME			= 	hello_exec
 
-NAME				= 			hello_exec
 
-
-all:								exec_cython exec_gcc
+all:				exec_cython exec_gcc
 
 exec_cython:
-										$(CYTHON) $(CYTHON_ARGS) -o $(CYTHON_OBJ) $(SRC)
+					$(CYTHON) $(CYTHON_ARGS) -o $(CYTHON_OBJ) $(SRC)
 
 exec_gcc:
-										$(GCC) $(GCC_INCLUDE) -o $(NAME) $(CYTHON_OBJ) $(GCC_ARGS)
+					$(GCC) $(GCC_INCLUDE) -o $(NAME) $(CYTHON_OBJ) $(GCC_ARGS)
 
 clean:
-										$(RM) $(CYTHON_OBJ)
+					$(RM) $(CYTHON_OBJ)
 
-fclean:							clean
-										$(RM) $(NAME)
+fclean:				clean
+					$(RM) $(NAME)
 
-re:									fclean all
+re:					fclean all
 
-.PHONY:							all clean fclean re
+.PHONY:				all clean fclean re
